@@ -16,6 +16,15 @@ jobs:
     # For PR events, only run when actually merged (not just closed)
     if: github.event_name == 'push' || (github.event_name == 'pull_request' && github.event.pull_request.merged == true)
 
+    env:
+      #ANTHROPIC_API_KEY: ${{ secrets.ANTHROPIC_API_KEY }}
+      TEST_PASSWORD: ${{ secrets.TEST_PASSWORD }}
+      BASE_URL: ${{ vars.BASE_URL }}
+      BROWSER: ${{ vars.BROWSER }}
+      HEADLESS: ${{ vars.HEADLESS }}
+      STANDARD_USER: ${{ vars.STANDARD_USER }}
+      SELF_HEALING_ENABLED: "true"
+
     steps:
       # ── Checkout ──────────────────────────────────────────────
       - name: Checkout repository
