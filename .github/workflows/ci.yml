@@ -8,6 +8,8 @@ on:
   pull_request:
     branches: [main]
     types: [closed]   # runs when PR is merged
+  schedule:
+    - cron: '0 4 * * *'
 
 jobs:
   test:
