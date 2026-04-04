@@ -85,6 +85,44 @@ jobs:
           exit $exit_code
         continue-on-error: false
 
+      # ── Install Allure CLI (no Docker) ────────────────────────
+      - name: Install Allure CLI
+        if: always()
+        run: |
+          curl -o allure.tgz -L https://github.com/allure-framework/allure2/releases/download/2.32.0/allure-2.32.0.tgz
+          tar -zxvf allure.tgz
+          sudo mv allure-2.32.0 /opt/allure
+          sudo ln -s /opt/allure/bin/allure /usr/local/bin/allure
+          allure --version
+
+      # ── Get Allure history from gh-pages ─────────────────────
+      - name: Get Allure history
+        uses: actions/checkout@v4
+        if: always()
+        continue-on-error: true
+        with:
+          ref: gh-pages
+          path: gh-pages
+
+      # ── Copy history into results for trend graphs ────────────
+      - name: Copy Allure history
+        if: always()
+        continue-on-error: true
+        run: |
+          if [ -d "gh-pages/history" ]; then
+            cp -r gh-pages/history reports/allure-results/history
+            echo "History copied successfully"
+          else
+            echo "No previous history found - first run"
+          fi
+
+      # ── Generate Allure HTML report ───────────────────────────
+      - name: Generate Allure HTML report
+        if: always()
+        run: |
+          allure generate reports/allure-results --clean -o reports/allure-html
+          echo "Allure report generated successfully"
+
       # ── Upload Allure results as artifact ─────────────────────
       - name: Upload Allure results
         uses: actions/upload-artifact@v4
@@ -94,7 +132,16 @@ jobs:
           path: reports/allure-results/
           retention-days: 14
 
-      # ── Upload test logs ──────────────────────────────────────
+      # ── Upload Allure HTML report as artifact ─────────────────
+      - name: Upload Allure HTML report
+        uses: actions/upload-artifact@v4
+        if: always()
+        with:
+          name: allure-html-report-${{ github.run_number }}
+          path: reports/allure-html/
+          retention-days: 14
+
+      # ── Upload logs ───────────────────────────────────────────
       - name: Upload test logs
         uses: actions/upload-artifact@v4
         if: always()
@@ -103,27 +150,11 @@ jobs:
           path: logs/
           retention-days: 7
 
-      # ── Publish Allure report to GitHub Pages ─────────────────
-      - name: Get Allure history
-        uses: actions/checkout@v4
-        if: always()
-        continue-on-error: true
-        with:
-          ref: gh-pages
-          path: gh-pages
-
-      - name: Generate Allure report
-        uses: simple-elf/allure-report-action@v1.9
-        if: always()
-        with:
-          allure_results: reports/allure-results
-          allure_history: allure-history
-          keep_reports: 20
-
+      # ── Deploy to GitHub Pages ────────────────────────────────
       - name: Deploy Allure report to GitHub Pages
-        if: always()
         uses: peaceiris/actions-gh-pages@v4
+        if: always()
         with:
           github_token: ${{ secrets.GITHUB_TOKEN }}
           publish_branch: gh-pages
-          publish_dir: allure-history
+          publish_dir: reports/allure-html
