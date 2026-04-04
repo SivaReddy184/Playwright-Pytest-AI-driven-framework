@@ -13,6 +13,8 @@ jobs:
   test:
     name: Run Playwright Tests
     runs-on: ubuntu-latest
+    permissions:
+      contents: write             # needed to push to gh-pages branch
     # For PR events, only run when actually merged (not just closed)
     if: github.event_name == 'push' || (github.event_name == 'pull_request' && github.event.pull_request.merged == true)
 
@@ -63,15 +65,25 @@ jobs:
         continue-on-error: false
 
       # ── Full regression suite ─────────────────────────────────
+#      - name: Run regression tests
+#        env:
+#          #ANTHROPIC_API_KEY: ${{ secrets.ANTHROPIC_API_KEY }}
+#          BASE_URL: ${{ vars.BASE_URL || 'https://www.saucedemo.com' }}
+#          HEADLESS: "true"
+#          SELF_HEALING_ENABLED: "true"
+#        run: |
+#          pytest tests/ -m regression -v --alluredir=reports/allure-results --tb=short
+#        continue-on-error: true
       - name: Run regression tests
-        env:
-          #ANTHROPIC_API_KEY: ${{ secrets.ANTHROPIC_API_KEY }}
-          BASE_URL: ${{ vars.BASE_URL || 'https://www.saucedemo.com' }}
-          HEADLESS: "true"
-          SELF_HEALING_ENABLED: "true"
         run: |
           pytest tests/ -m regression -v --alluredir=reports/allure-results --tb=short
-        continue-on-error: true
+          exit_code=$?
+          if [ $exit_code -eq 5 ]; then
+            echo "No regression tests collected - skipping"
+            exit 0
+          fi
+          exit $exit_code
+        continue-on-error: false
 
       # ── Upload Allure results as artifact ─────────────────────
       - name: Upload Allure results
@@ -101,7 +113,7 @@ jobs:
           path: gh-pages
 
       - name: Generate Allure report
-        uses: simple-elf/allure-report-action@master
+        uses: simple-elf/allure-report-action@1.9
         if: always()
         with:
           allure_results: reports/allure-results
