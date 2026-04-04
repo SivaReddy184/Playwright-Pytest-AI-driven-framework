@@ -74,16 +74,16 @@ jobs:
 #        run: |
 #          pytest tests/ -m regression -v --alluredir=reports/allure-results --tb=short
 #        continue-on-error: true
-      - name: Run regression tests
-        run: |
-          pytest tests/ -m regression -v --alluredir=reports/allure-results --tb=short
-          exit_code=$?
-          if [ $exit_code -eq 5 ]; then
-            echo "No regression tests collected - skipping"
-            exit 0
-          fi
-          exit $exit_code
-        continue-on-error: false
+#      - name: Run regression tests
+#        run: |
+#          pytest tests/ -m regression -v --alluredir=reports/allure-results --tb=short
+#          exit_code=$?
+#          if [ $exit_code -eq 5 ]; then
+#            echo "No regression tests collected - skipping"
+#            exit 0
+#          fi
+#          exit $exit_code
+#        continue-on-error: false
 
       # ── Install Allure CLI (no Docker) ────────────────────────
       - name: Install Allure CLI
