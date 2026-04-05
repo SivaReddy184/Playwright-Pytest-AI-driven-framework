@@ -1,0 +1,8 @@
+05:58:25 | DEBUG    | asyncio | Using selector: EpollSelector
+05:58:25 | INFO     | conftest | Browser launched: firefox | headless=True
+05:58:26 | INFO     | pages.base_page | Navigating to: https://rahulshettyacademy.com/client/#/auth/login
+05:58:28 | INFO     | pages.login_page | Login page opened
+05:58:28 | INFO     | pages.base_page | Fill → '#userEmail' = 'rahulshetty@gmail.com'
+05:58:29 | INFO     | pages.base_page | Fill → '#userPassword' = 'Iamking@000'
+05:58:29 | INFO     | pages.base_page | Click → '#login'
+05:58:29 | INFO     | pages.login_page | Logged in with rahulshetty@gmail.com
