@@ -10,7 +10,7 @@ class LoginPage(BasePage):
     USERNAME_INPUT = '#userEmail'
     PASSWORD_INPUT = '#userPassword'
     LOGIN_BUTTON = '#login'
-    ERROR_MESSAGE = ''
+    ERROR_MESSAGE = '#toast-container'
 
     def __init__(self, page):
         super().__init__(page)
