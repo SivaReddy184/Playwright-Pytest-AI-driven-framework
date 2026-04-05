@@ -87,7 +87,7 @@ jobs:
 
       # ── Playwright browsers ───────────────────────────────────
       - name: Install Playwright browsers
-        run: playwright install --with-deps chromium
+        run: playwright install --with-deps chromium firefox webkit
 
       # ── Create required directories ───────────────────────────
       - name: Create output directories
