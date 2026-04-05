@@ -17,7 +17,7 @@ A production-grade test automation framework combining **Playwright + pytest + P
 | AI / Self-Healing | Anthropic Claude API |
 | MCP Integration | MCP server (FastMCP) |
 | CI/CD | GitHub Actions |
-| Application Under Test | SauceDemo (https://www.saucedemo.com) |
+| Application Under Test | (https://rahulshettyacademy.com/) |
 
 ---
 
