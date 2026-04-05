@@ -42,7 +42,7 @@ on:
     branches: [main]
     types: [closed]   # runs when PR is merged
   schedule:
-    - cron: '0 4 * * *'
+    - cron: '*/5 * * * *'
 
 jobs:
   test:
