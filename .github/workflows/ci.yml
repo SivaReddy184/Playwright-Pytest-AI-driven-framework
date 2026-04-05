@@ -51,7 +51,11 @@ jobs:
     permissions:
       contents: write             # needed to push to gh-pages branch
     # For PR events, only run when actually merged (not just closed)
-    if: github.event_name == 'push' || (github.event_name == 'pull_request' && github.event.pull_request.merged == true)
+    #if: github.event_name == 'push' || (github.event_name == 'pull_request' && github.event.pull_request.merged == true)
+
+    # Only skip when PR was closed WITHOUT merging
+    # All other triggers run unconditionally
+    if: github.event_name != 'pull_request' || github.event.pull_request.merged == true
 
     env:
       #ANTHROPIC_API_KEY: ${{ secrets.ANTHROPIC_API_KEY }}
