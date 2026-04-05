@@ -1,1 +1,0 @@
-05:40:24 | DEBUG    | asyncio | Using selector: EpollSelector
