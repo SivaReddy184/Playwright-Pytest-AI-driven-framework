@@ -1,7 +1,0 @@
-2026-04-08 05:46:22 | INFO     | conftest | Browser launched: chromium | headless=True
-2026-04-08 05:46:22 | INFO     | pages.base_page | Navigating to: https://rahulshettyacademy.com/client/#/auth/login
-2026-04-08 05:46:24 | INFO     | pages.login_page | Login page opened
-2026-04-08 05:46:24 | INFO     | pages.base_page | Fill → '#userEmail' = 'rahulshetty@gmail.com'
-2026-04-08 05:46:24 | INFO     | pages.base_page | Fill → '#userPassword' = 'Iamking@000'
-2026-04-08 05:46:24 | INFO     | pages.base_page | Click → '#login'
-2026-04-08 05:46:24 | INFO     | pages.login_page | Logged in with rahulshetty@gmail.com
