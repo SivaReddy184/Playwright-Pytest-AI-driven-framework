@@ -1,2 +1,2 @@
 "DESCRIPTION","DURATION IN MS","NAME","PARENT SUITE","START TIME","STATUS","STOP TIME","SUB SUITE","SUITE","TEST CLASS","TEST METHOD"
-"Standard user should land on inventory page after login.","2636","test_valid_login","tests","Mon Jun 01 09:24:17 UTC 2026","passed","Mon Jun 01 09:24:20 UTC 2026","TestLogin","test_login","",""
+"Standard user should land on inventory page after login.","2473","test_valid_login","tests","Tue Jun 02 08:26:53 UTC 2026","passed","Tue Jun 02 08:26:55 UTC 2026","TestLogin","test_login","",""
