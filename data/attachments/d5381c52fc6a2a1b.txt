@@ -1,8 +1,0 @@
-09:01:07 | DEBUG    | asyncio | Using selector: EpollSelector
-09:01:07 | INFO     | conftest | Browser launched: chromium | headless=True
-09:01:07 | INFO     | pages.base_page | Navigating to: https://rahulshettyacademy.com/client/#/auth/login
-09:01:12 | INFO     | pages.login_page | Login page opened
-09:01:12 | INFO     | pages.base_page | Fill → '#userEmail' = 'rahulshetty@gmail.com'
-09:01:12 | INFO     | pages.base_page | Fill → '#userPassword' = 'Iamking@000'
-09:01:12 | INFO     | pages.base_page | Click → '#login'
-09:01:12 | INFO     | pages.login_page | Logged in with rahulshetty@gmail.com
